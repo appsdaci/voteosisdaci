@@ -23,10 +23,8 @@
         .paslon-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px 8px 0 0; }
         .stat-card { transition: all 0.3s ease; }
         .stat-card:hover { transform: scale(1.02); }
-        /* Animasi background untuk Hero Section */
         .bg-pattern { background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px); background-size: 16px 16px; }
         
-        /* Animasi Melayang untuk Logo */
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
@@ -34,7 +32,6 @@
         }
         .animate-floating { animation: floating 3s ease-in-out infinite; }
 
-        /* Mode Fullscreen Profesional untuk Liveboard */
         #menu-liveboard:fullscreen {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             padding: 1.5rem;
@@ -56,7 +53,6 @@
             justify-content: space-between;
         }
 
-        /* Custom Scrollbar for better look on Desktop */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -85,51 +81,38 @@
     <!-- MAIN CONTENT -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
         
-        <!-- MENU PEMILIH (BERANDA DEPAN) -->
+        <!-- MENU PEMILIH -->
         <div id="menu-pemilih" class="menu-section">
-            
-            <!-- HERO SECTION PROFESIONAL & KOMPAK -->
             <div class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 rounded-2xl shadow-lg overflow-hidden mb-6 relative">
                 <div class="absolute inset-0 bg-pattern opacity-30"></div>
-                <div class="absolute -top-16 -right-16 w-48 h-48 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-40"></div>
-                <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-40"></div>
-                
                 <div class="px-4 py-8 md:py-10 text-center relative z-10 flex flex-col items-center">
-                    <!-- LOGO TERBARU -->
                     <img src="https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1" alt="Logo SMAN 2 Cimalaka" class="h-20 w-20 md:h-24 md:w-24 mb-4 drop-shadow-xl bg-white/20 p-2 rounded-full backdrop-blur-sm border border-white/30">
-                    
                     <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 tracking-tight drop-shadow-md leading-tight">
                         PEMILIHAN KETUA & WAKIL OSIS
                     </h1>
                     <h2 class="text-lg md:text-2xl font-semibold text-yellow-400 mb-6 drop-shadow-sm">
                         SMA Negeri 2 Cimalaka
                     </h2>
-                    
                     <div class="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-2 text-white font-bold tracking-widest text-xs md:text-sm shadow-inner">
                         <i class="fas fa-calendar-alt mr-2"></i> PERIODE 2026 - 2027
                     </div>
                 </div>
             </div>
             
-            <!-- SCANNER SECTION -->
             <div id="scanner-container" class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 max-w-xl mx-auto relative overflow-hidden">
                 <div class="text-center mb-6">
                     <h3 class="text-xl md:text-2xl font-bold text-gray-800"><i class="fas fa-expand text-blue-600 mr-2"></i>Verifikasi Pemilih</h3>
                     <p class="text-gray-500 mt-2 text-sm md:text-base">Arahkan QR Code pada kartu Anda ke kamera.</p>
                 </div>
-                
-                <!-- CONTAINER SCANNER DIPERBARUI AGAR KAMERA MUNCUL -->
                 <div class="border-4 border-dashed border-blue-200 rounded-xl p-2 bg-blue-50 mx-auto w-full max-w-sm">
                     <div id="reader"></div>
                 </div>
-                
                 <div class="mt-6 flex items-center justify-center text-xs md:text-sm text-gray-500 bg-gray-50 py-2 md:py-3 rounded-lg px-2 text-center">
                     <i class="fas fa-shield-alt text-green-500 mr-2 text-base md:text-lg"></i>
                     <span>Sistem dilindungi enkripsi. 1 Pemilih = 1 Suara.</span>
                 </div>
             </div>
 
-            <!-- HALAMAN KARTU KANDIDAT -->
             <div id="kandidat-container" class="hidden mt-6 md:mt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center bg-blue-50 border-l-4 border-blue-600 p-4 rounded-lg mb-6 shadow-sm gap-4">
                     <div class="text-center md:text-left">
@@ -140,15 +123,11 @@
                         <i class="fas fa-sign-out-alt mr-2"></i> Batalkan & Keluar
                     </button>
                 </div>
-                
                 <div class="text-center mb-6">
                     <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800">Surat Suara Digital</h2>
                     <p class="text-gray-500 mt-1 text-sm md:text-base">Tentukan pilihan Anda dengan menekan tombol pada salah satu kandidat di bawah ini.</p>
                 </div>
-                
-                <div id="kandidat-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Kandidat cards injected here -->
-                </div>
+                <div id="kandidat-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
             </div>
         </div>
 
@@ -163,10 +142,28 @@
                 <div class="p-4 md:p-6">
                     <!-- Tab Pemilih -->
                     <div id="tab-pemilih" class="admin-content">
+                        <!-- PANEL TOMBOL CETAK DOKUMEN -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 p-4 rounded-xl mb-6 shadow-sm">
+                            <h3 class="text-sm font-bold text-blue-900 mb-2 uppercase tracking-wide flex items-center">
+                                <i class="fas fa-file-pdf text-red-600 mr-2 text-lg"></i> Cetak Dokumen, Laporan & Surat Undangan OSIS
+                            </h3>
+                            <p class="text-xs text-gray-600 mb-3">Dokumen resmi ber-KOP OSIS SMAN 2 Cimalaka. Masukkan detail penandatangan melalui popup saat tombol ditekan.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="promptInfoAndPrint('undangan')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg shadow transition flex items-center">
+                                    <i class="fas fa-envelope-open-text mr-2"></i> Cetak Surat Undangan Pemilih (2/Lembar)
+                                </button>
+                                <button onclick="promptInfoAndPrint('laporan')" class="bg-blue-700 hover:bg-blue-800 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg shadow transition flex items-center">
+                                    <i class="fas fa-print mr-2"></i> Cetak Laporan Status Pemilih
+                                </button>
+                                <button onclick="promptInfoAndPrint('rekap')" class="bg-indigo-700 hover:bg-indigo-800 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg shadow transition flex items-center">
+                                    <i class="fas fa-file-signature mr-2"></i> Cetak Berita Acara Rekapitulasi Paslon
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="flex flex-col lg:flex-row justify-between items-center mb-6 gap-4">
                             <h2 class="text-lg md:text-xl font-bold text-gray-800 self-start lg:self-center">Manajemen Pemilih</h2>
                             <div class="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
-                                <!-- FILTER STATUS PEMILIH -->
                                 <select id="filter-status-pemilih" class="border rounded px-3 py-2 text-sm bg-white flex-1 sm:flex-none text-gray-700 font-medium" onchange="renderTableSiswa()">
                                     <option value="ALL">Semua Status</option>
                                     <option value="BELUM">Belum Memilih</option>
@@ -176,7 +173,7 @@
                                 <select id="filter-kelas-cetak" class="border rounded px-3 py-2 text-sm bg-white flex-1 sm:flex-none" onchange="renderTableSiswa()">
                                     <option value="ALL">Semua Kelas</option>
                                 </select>
-                                <button onclick="cetakKartuSiswa()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition flex items-center justify-center shadow w-full sm:w-auto text-sm md:text-base"><i class="fas fa-print mr-2"></i> Cetak Kartu</button>
+                                <button onclick="cetakKartuSiswa()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition flex items-center justify-center shadow w-full sm:w-auto text-sm md:text-base"><i class="fas fa-id-card mr-2"></i> Cetak Kartu</button>
                             </div>
                         </div>
 
@@ -220,10 +217,8 @@
                         <form id="form-kandidat" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 bg-gray-50 p-4 rounded-lg border">
                             <input type="number" id="input-no-urut" placeholder="Nomor Urut (Contoh: 1)" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
                             <input type="url" id="input-foto" placeholder="Link URL Foto Paslon (Opsional)" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                            
                             <input type="text" id="input-ketua" placeholder="Nama Calon Ketua" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
                             <input type="text" id="input-wakil" placeholder="Nama Calon Wakil" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required>
-                            
                             <textarea id="input-visi" placeholder="Visi" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 text-sm" required></textarea>
                             <textarea id="input-misi" placeholder="Misi" class="border rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 text-sm" required></textarea>
                             <div class="md:col-span-2">
@@ -252,8 +247,6 @@
         <!-- MENU LIVE BOARD -->
         <div id="menu-liveboard" class="menu-section hidden">
             <div class="liveboard-card-main bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 max-w-7xl mx-auto flex flex-col justify-between">
-                
-                <!-- HEADER DASHBOARD DENGAN LOGO ANIMASI & KONTROL FULLSCREEN -->
                 <div class="flex flex-row justify-between items-center mb-4 pb-3 border-b">
                     <div class="flex items-center gap-3">
                         <img src="https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1" alt="Logo SMAN 2 Cimalaka" class="h-12 w-12 md:h-14 md:w-14 animate-floating drop-shadow-md">
@@ -262,7 +255,6 @@
                             <p class="text-gray-500 text-xs md:text-sm">Pemilihan Ketua & Wakil OSIS SMAN 2 Cimalaka Periode 2026-2027</p>
                         </div>
                     </div>
-                    
                     <div class="flex items-center gap-2">
                         <button onclick="fetchData(true)" class="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition shadow text-xs md:text-sm font-semibold flex items-center">
                             <i class="fas fa-sync-alt mr-1.5"></i> <span class="hidden sm:inline">Sinkronisasi</span>
@@ -273,7 +265,6 @@
                     </div>
                 </div>
                 
-                <!-- Stat Cards Compact & Elegan -->
                 <div class="grid grid-cols-3 gap-3 md:gap-4 mb-4 text-center">
                     <div class="stat-card bg-gradient-to-br from-blue-50 to-blue-100 p-3 md:p-4 rounded-xl shadow-sm border border-blue-200 relative overflow-hidden">
                         <p class="text-[10px] md:text-xs text-blue-700 font-bold uppercase tracking-wider mb-1">Total DPT</p>
@@ -289,27 +280,20 @@
                     </div>
                 </div>
 
-                <!-- Chart Canvas Container (Tinggi Ideal Agar Seluruh Tampilan Pas 1 Layar) -->
                 <div class="w-full h-[260px] md:h-[300px] relative mb-4">
                     <canvas id="votingChart"></canvas>
                 </div>
 
-                <!-- KARTU STATISTIK DETIL PASLON DI BAWAH GRAFIK -->
                 <div class="border-t pt-4">
-                    <div id="liveboard-kandidat-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Dynamic Cards Injected Here -->
-                    </div>
+                    <div id="liveboard-kandidat-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
                 </div>
-
             </div>
         </div>
     </div>
 
 <script>
-    // URL WEB APP APPS SCRIPT ANDA
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxMmOG8N0iCrr_wInh0K9zOYg-qLKX8jEXswFmPLVv9O3aYDjlzm1O3z0j_pa03ox4/exec"; 
 
-    // Global State
     let dataSiswa = [];
     let dataKandidat = [];
     let dataVoting = [];
@@ -319,32 +303,22 @@
 
     Chart.register(ChartDataLabels);
 
-    // --- FULLSCREEN TOGGLE ---
     function toggleFullScreen() {
         const liveboardEl = document.getElementById('menu-liveboard');
         if (!document.fullscreenElement) {
-            if (liveboardEl.requestFullscreen) {
-                liveboardEl.requestFullscreen();
-            } else if (liveboardEl.webkitRequestFullscreen) {
-                liveboardEl.webkitRequestFullscreen();
-            } else if (liveboardEl.msRequestFullscreen) {
-                liveboardEl.msRequestFullscreen();
-            }
+            if (liveboardEl.requestFullscreen) liveboardEl.requestFullscreen();
+            else if (liveboardEl.webkitRequestFullscreen) liveboardEl.webkitRequestFullscreen();
+            else if (liveboardEl.msRequestFullscreen) liveboardEl.msRequestFullscreen();
         } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
+            if (document.exitFullscreen) document.exitFullscreen();
         }
     }
 
-    // --- NAVIGATION & UI ---
     function switchMenu(menu) {
         document.querySelectorAll('.menu-section').forEach(el => el.classList.add('hidden'));
         document.getElementById(`menu-${menu}`).classList.remove('hidden');
-        
         if(menu === 'pemilih') startScanner();
         else stopScanner();
-
         if(menu === 'liveboard') updateLiveBoard();
     }
 
@@ -354,30 +328,24 @@
             el.classList.remove('text-blue-800', 'border-b-4', 'border-blue-800', 'bg-blue-50');
             el.classList.add('text-gray-500', 'hover:bg-gray-50');
         });
-        
         document.getElementById(tabId).classList.remove('hidden');
         document.getElementById(`btn-${tabId}`).classList.add('text-blue-800', 'border-b-4', 'border-blue-800', 'bg-blue-50');
         document.getElementById(`btn-${tabId}`).classList.remove('text-gray-500', 'hover:bg-gray-50');
     }
 
-    // --- FETCH DATA DARI SPREADSHEET ---
     async function fetchData(showLoading = false) {
         if(showLoading) {
             Swal.fire({ title: 'Memuat Data...', text: 'Tunggu sebentar...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
         }
-        
         try {
             const response = await fetch(WEB_APP_URL);
             const data = await response.json();
-            
             dataSiswa = data.siswa || [];
             dataKandidat = data.kandidat || [];
             dataVoting = data.voting || [];
-            
             renderTableSiswa();
             renderTableKandidat();
             updateLiveBoard();
-            
             if(showLoading) Swal.close();
         } catch (error) {
             console.error(error);
@@ -385,28 +353,16 @@
         }
     }
 
-    // --- QR CODE SCANNER ---
     function startScanner() {
         document.getElementById('scanner-container').classList.remove('hidden');
         document.getElementById('kandidat-container').classList.add('hidden');
-        
         const heroBanner = document.querySelector('.bg-gradient-to-br');
         if(heroBanner) heroBanner.classList.remove('hidden');
-        
-        if (!html5QrcodeScanner) {
-            html5QrcodeScanner = new Html5Qrcode("reader");
-        }
+        if (!html5QrcodeScanner) html5QrcodeScanner = new Html5Qrcode("reader");
 
-        const config = { 
-            fps: 20, 
-            qrbox: { width: 250, height: 250 } 
-        };
-        
+        const config = { fps: 20, qrbox: { width: 250, height: 250 } };
         html5QrcodeScanner.start({ facingMode: "environment" }, config, 
-            (decodedText) => {
-                stopScanner();
-                handleScan(decodedText);
-            },
+            (decodedText) => { stopScanner(); handleScan(decodedText); },
             (error) => {} 
         ).catch(err => console.error("Kamera gagal dimulai:", err));
     }
@@ -427,7 +383,6 @@
             Swal.fire('QR Tidak Valid', 'Gunakan QR resmi dari panitia', 'error').then(() => startScanner());
             return;
         }
-
         const nisn = decodedText.replace("EVOTING-", "");
         const siswa = dataSiswa.find(s => String(s.nisn) === String(nisn));
 
@@ -435,7 +390,6 @@
             Swal.fire('Tidak Terdaftar', `NISN/NIP ${nisn} tidak ditemukan!`, 'error').then(() => startScanner());
             return;
         }
-
         if (siswa.hasVoted) {
             Swal.fire('Sudah Memilih', `Maaf ${siswa.nama}, hak suara sudah digunakan.`, 'warning').then(() => startScanner());
             return;
@@ -443,20 +397,16 @@
 
         activePemilih = siswa;
         document.getElementById('nama-pemilih-aktif').innerHTML = `<i class="fas fa-user-check mr-2 text-green-600"></i>${siswa.nama} <span class="text-sm font-normal text-gray-600">(${siswa.kelas})</span>`;
-        
         const heroBanner = document.querySelector('.bg-gradient-to-br');
         if(heroBanner) heroBanner.classList.add('hidden'); 
-        
         document.getElementById('scanner-container').classList.add('hidden');
         document.getElementById('kandidat-container').classList.remove('hidden');
         renderKandidatCards();
     }
 
-    // --- PEMILIHAN ---
     function renderKandidatCards() {
         const container = document.getElementById('kandidat-list');
         container.innerHTML = '';
-        
         dataKandidat.forEach(k => {
             const fotoUrl = k.foto ? k.foto : 'https://via.placeholder.com/400x300.png?text=Foto+Paslon';
             container.innerHTML += `
@@ -464,9 +414,7 @@
                     <div class="absolute top-2 left-2 z-10 bg-yellow-400 text-blue-900 font-black w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-xl md:text-2xl shadow-md border-2 border-white">
                         ${k.id}
                     </div>
-                    
                     <img src="${fotoUrl}" alt="Foto Paslon ${k.id}" class="paslon-img bg-gray-200">
-                    
                     <div class="p-4 md:p-5 flex-grow flex flex-col">
                         <div class="text-center mb-3 border-b pb-3">
                             <h3 class="text-lg md:text-xl font-bold text-gray-800">${k.ketua}</h3>
@@ -500,22 +448,18 @@
             confirmButtonText: 'Ya, Sahkan!',
             cancelButtonText: 'Batal'
         }).then((result) => {
-            if (result.isConfirmed) {
-                submitVote(kandidatId);
-            }
+            if (result.isConfirmed) submitVote(kandidatId);
         });
     }
 
     async function submitVote(kandidatId) {
         Swal.fire({ title: 'Memproses...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-        
         try {
             const response = await fetch(WEB_APP_URL, {
                 method: 'POST',
                 body: JSON.stringify({ action: 'vote', nisn: activePemilih.nisn, kandidatId: kandidatId })
             });
             const resData = await response.json();
-            
             if(resData.status === "success") {
                 Swal.fire({
                     title: 'Pilihan Sah!',
@@ -527,15 +471,12 @@
                     fetchData(false);
                     resetScanner();
                 });
-            } else {
-                Swal.fire('Gagal', 'Terjadi kesalahan sistem.', 'error');
-            }
+            } else Swal.fire('Gagal', 'Terjadi kesalahan sistem.', 'error');
         } catch (error) {
             Swal.fire('Error', 'Gagal terhubung ke jaringan', 'error');
         }
     }
 
-    // --- MANAJEMEN DATA (PANITIA) ---
     document.getElementById('form-siswa').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = e.target.querySelector('button'); btn.disabled = true;
@@ -545,7 +486,6 @@
             nama: document.getElementById('input-nama').value.toUpperCase(),
             kelas: document.getElementById('input-kelas').value.toUpperCase()
         };
-        
         Swal.fire({ title: 'Menyimpan...', didOpen: () => Swal.showLoading() });
         try {
             const response = await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(data) });
@@ -555,9 +495,7 @@
                 e.target.reset();
                 fetchData();
             } else throw new Error(res.message);
-        } catch (error) {
-            Swal.fire('Error', 'Gagal menyimpan', 'error');
-        }
+        } catch (error) { Swal.fire('Error', 'Gagal menyimpan', 'error'); }
         btn.disabled = false;
     });
 
@@ -571,7 +509,6 @@
             const workbook = XLSX.read(data, {type: 'array'});
             const worksheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1}); 
-            
             if(jsonData.length < 2) return Swal.fire('Gagal', 'File kosong/format salah.', 'error');
 
             let siswaArray = [];
@@ -588,7 +525,6 @@
             if(siswaArray.length === 0) return Swal.fire('Gagal', 'Tidak ada data valid.', 'error');
 
             Swal.fire({ title: `Import ${siswaArray.length} Data...`, didOpen: () => Swal.showLoading() });
-            
             try {
                 const response = await fetch(WEB_APP_URL, {
                     method: 'POST',
@@ -599,9 +535,7 @@
                     Swal.fire('Sukses', `${siswaArray.length} data masuk!`, 'success');
                     fetchData();
                 } else throw new Error(res.message);
-            } catch(error) {
-                Swal.fire('Error', 'Gagal import.', 'error');
-            }
+            } catch(error) { Swal.fire('Error', 'Gagal import.', 'error'); }
             event.target.value = ""; 
         };
         reader.readAsArrayBuffer(file);
@@ -619,7 +553,6 @@
             misi: document.getElementById('input-misi').value,
             foto: document.getElementById('input-foto').value || ''
         };
-
         Swal.fire({ title: 'Menyimpan...', didOpen: () => Swal.showLoading() });
         try {
             const response = await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(data) });
@@ -629,9 +562,7 @@
                 e.target.reset();
                 fetchData();
             } else throw new Error(res.message);
-        } catch (error) {
-            Swal.fire('Error', 'Gagal menyimpan', 'error');
-        }
+        } catch (error) { Swal.fire('Error', 'Gagal menyimpan', 'error'); }
         btn.disabled = false;
     });
 
@@ -639,11 +570,9 @@
         const tbody = document.getElementById('table-siswa');
         tbody.innerHTML = '';
         const kelasSet = new Set();
-
         const filterKelas = document.getElementById('filter-kelas-cetak').value;
         const filterStatus = document.getElementById('filter-status-pemilih').value;
 
-        // Filter data berdasarkan Kelas dan Status
         let filteredData = dataSiswa.filter(s => {
             let matchKelas = (filterKelas === 'ALL') || (s.kelas === filterKelas);
             let matchStatus = true;
@@ -665,9 +594,12 @@
                     <td class="p-3 font-semibold text-gray-800">${s.nama}</td>
                     <td class="p-3">${s.kelas}</td>
                     <td class="p-3 text-center">${statusBadge}</td>
-                    <td class="p-3 text-center">
-                        <button onclick="cetakKartuSiswa(null, '${s.nisn}')" class="text-blue-600 hover:text-blue-800">
-                            <i class="fas fa-print"></i>
+                    <td class="p-3 text-center space-x-2">
+                        <button onclick="cetakKartuSiswa(null, '${s.nisn}')" class="text-blue-600 hover:text-blue-800" title="Cetak Kartu">
+                            <i class="fas fa-id-card"></i>
+                        </button>
+                        <button onclick="promptInfoAndPrint('undangan-single', '${s.nisn}')" class="text-emerald-600 hover:text-emerald-800" title="Cetak Surat Undangan">
+                            <i class="fas fa-envelope"></i>
                         </button>
                     </td>
                 </tr>
@@ -737,7 +669,424 @@
         printWindow.document.write(htmlContent); printWindow.document.close();
     }
 
-    // --- CHART LIVE BOARD & RINCIAN KARD KANDIDAT ---
+    // --- POP-UP INPUT DETAIL PENANDATANGAN & TANGGAL SEBELUM CETAK ---
+    function promptInfoAndPrint(type, extraParam = null) {
+        let defaultDate = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        
+        Swal.fire({
+            title: '<span class="text-blue-900 text-lg font-bold"><i class="fas fa-file-signature mr-2"></i>Informasi Penandatangan Dokumen</span>',
+            html: `
+                <div class="text-left text-xs space-y-3 mt-2">
+                    <div>
+                        <label class="font-semibold text-gray-700 block mb-1">Nama Ketua Panitia:</label>
+                        <input type="text" id="swal-ketua" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: Muhammad Rizki" value="M. RIZKI FAUZAN">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700 block mb-1">NIS / NISN Ketua Panitia:</label>
+                        <input type="text" id="swal-nisn" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: 007281923" value="0078239120">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700 block mb-1">Nama Pembina OSIS:</label>
+                        <input type="text" id="swal-pembina" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: Dudi Supriadi, S.Pd." value="DUDI SUPRIADI, S.Pd.">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700 block mb-1">NIP Pembina OSIS:</label>
+                        <input type="text" id="swal-nip" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: 198506122010011005" value="198506122010011005">
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700 block mb-1">Tanggal Pemilihan / Surat (Titimangsa):</label>
+                        <input type="text" id="swal-tanggal" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: 15 November 2026" value="${defaultDate}">
+                    </div>
+                </div>
+            `,
+            confirmButtonText: '<i class="fas fa-print mr-1"></i> Lanjutkan Cetak',
+            confirmButtonColor: '#1d4ed8',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            focusConfirm: false,
+            preConfirm: () => {
+                return {
+                    ketua: document.getElementById('swal-ketua').value,
+                    nisn: document.getElementById('swal-nisn').value,
+                    pembina: document.getElementById('swal-pembina').value,
+                    nip: document.getElementById('swal-nip').value,
+                    tanggal: document.getElementById('swal-tanggal').value
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const info = result.value;
+                if(type === 'undangan') cetakSuratUndanganMassal(info);
+                else if(type === 'undangan-single') cetakSuratUndanganSingle(extraParam, info);
+                else if(type === 'laporan') executeCetakLaporanStatus(info);
+                else if(type === 'rekap') executeCetakRekapitulasi(info);
+            }
+        });
+    }
+
+    // --- CETAK SURAT UNDANGAN PEMILIH (2 ORANG PER LEMBAR A4) ---
+    function cetakSuratUndanganMassal(info) {
+        if(dataSiswa.length === 0) return Swal.fire('Kosong', 'Belum ada data pemilih', 'info');
+        const filterKelas = document.getElementById('filter-kelas-cetak').value;
+        let dataToPrint = filterKelas === 'ALL' ? dataSiswa : dataSiswa.filter(s => s.kelas === filterKelas);
+        if(dataToPrint.length === 0) return Swal.fire('Kosong', 'Tidak ada data pemilih pada kelas ini', 'info');
+
+        renderAndOpenPrintWindowForUndangan(dataToPrint, info);
+    }
+
+    function cetakSuratUndanganSingle(nisn, info) {
+        let siswa = dataSiswa.find(s => String(s.nisn) === String(nisn));
+        if(!siswa) return Swal.fire('Error', 'Data pemilih tidak ditemukan', 'error');
+        renderAndOpenPrintWindowForUndangan([siswa], info);
+    }
+
+    function renderAndOpenPrintWindowForUndangan(listSiswa, info) {
+        const logoOsisUrl = "https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1";
+        let printWindow = window.open('', '_blank');
+        
+        let htmlContent = `
+        <html>
+        <head>
+            <title>Surat Undangan Pemilihan OSIS SMAN 2 Cimalaka</title>
+            <style>
+                @page { size: A4; margin: 10mm; }
+                body { font-family: "Times New Roman", Times, serif; font-size: 10pt; color: #000; line-height: 1.25; }
+                .page-card { height: 130mm; display: flex; flex-direction: column; justify-content: space-between; padding: 4mm 8mm; box-sizing: border-box; page-break-inside: avoid; }
+                .divider { border-bottom: 2px dashed #333; margin: 4mm 0; }
+                .kop { border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 6px; text-align: center; position: relative; }
+                .kop img { position: absolute; left: 5px; top: 0; width: 45px; height: 45px; object-fit: contain; }
+                .kop h2 { margin: 0; font-size: 10pt; font-weight: bold; text-transform: uppercase; }
+                .kop h1 { margin: 1px 0; font-size: 11pt; font-weight: bold; text-transform: uppercase; }
+                .kop p { margin: 0; font-size: 8pt; font-style: italic; }
+                .title { text-align: center; font-size: 10pt; font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 2px; }
+                .doc-num { text-align: center; font-size: 8.5pt; margin-bottom: 5px; }
+                .content-box { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+                .text-details { width: 72%; font-size: 9.5pt; }
+                .qr-box { width: 25%; text-align: center; border: 1px solid #000; padding: 3px; background: #fafafa; }
+                .qr-box img { width: 75px; height: 75px; }
+                .schedule-table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 9pt; }
+                .schedule-table td { border: 1px solid #000; padding: 3px 5px; }
+                .ttd-table { width: 100%; border: none; margin-top: 4px; }
+                .ttd-table td { border: none; text-align: right; vertical-align: top; padding: 0; font-size: 9.5pt; }
+                .space-ttd { height: 32px; }
+            </style>
+        </head>
+        <body>
+        `;
+
+        for (let i = 0; i < listSiswa.length; i++) {
+            let s = listSisan = listSiswa[i];
+            let qr = new QRious({ value: `EVOTING-${s.nisn}`, size: 100, level: 'H' });
+            
+            htmlContent += `
+            <div class="page-card">
+                <div>
+                    <div class="kop">
+                        <img src="${logoOsisUrl}" alt="Logo OSIS">
+                        <h2>ORGANISASI SISWA INTRA SEKOLAH (OSIS)</h2>
+                        <h1>PANITIA PEMILIHAN KETUA & WAKIL KETUA OSIS</h1>
+                        <p>SMA NEGERI 2 CIMALAKA - Jl. Licin No. 12 Sumedang</p>
+                    </div>
+
+                    <div class="title">SURAT UNDANGAN PEMILIHAN E-VOTING OSIS</div>
+                    <div class="doc-num">Nomor: 001/PAN-EVOTING/OSIS/SMAN2/2026</div>
+
+                    <p style="margin: 2px 0 4px 0; font-size: 9.5pt;">Kepada Yth.<br><b>Sdr/i. ${s.nama} (${s.kelas})</b><br>di Tempat</p>
+
+                    <p style="margin: 2px 0 4px 0; font-size: 9pt; text-align: justify;">Dengan hormat, sehubungan dengan penyelenggaraan Demokrasi Sekolah Pemilihan Ketua & Wakil Ketua OSIS SMAN 2 Cimalaka Periode 2026/2027, dengan ini kami mengundang Anda untuk menggunakan hak pilih suara secara elektronik.</p>
+
+                    <div class="content-box">
+                        <div class="text-details">
+                            <table class="schedule-table">
+                                <tr><td style="width: 32%;"><b>Hari / Tanggal</b></td><td>: ${info.tanggal}</td></tr>
+                                <tr><td><b>Waktu</b></td><td>: Pukul 08.00 s.d. 14.00 WIB</td></tr>
+                                <tr><td><b>Tempat</b></td><td>: Bilik Suara SMAN 2 Cimalaka</td></tr>
+                            </table>
+                        </div>
+                        <div class="qr-box">
+                            <img src="${qr.toDataURL('image/png')}"><br>
+                            <span style="font-size: 7.5pt; font-weight: bold;">SCAN QR ABSEN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="ttd-table">
+                    <tr>
+                        <td>
+                            Sumedang, ${info.tanggal}<br><b>Ketua Panitia E-Voting</b>
+                            <div class="space-ttd"></div>
+                            <b>${info.ketua}</b><br>
+                            NIS. ${info.nisn}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            `;
+
+            // Tambahkan garis pemisah jika bukan elemen terakhir dan berada di urutan ganjil (indeks genap)
+            if (i < listSiswa.length - 1 && i % 2 === 0) {
+                htmlContent += `<div class="divider"></div>`;
+            } else if (i < listSiswa.length - 1 && i % 2 !== 0) {
+                // Jika sudah genap 2 undangan per lembar, buat page break agar masuk ke halaman berikutnya
+                htmlContent += `<div style="page-break-after: always;"></div>`;
+            }
+        }
+
+        htmlContent += `<script>window.onload = function() { window.print(); };<\/script></body></html>`;
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+    }
+
+    // --- CETAK LAPORAN STATUS PEMILIH ---
+    function executeCetakLaporanStatus(info) {
+        const filterStatus = document.getElementById('filter-status-pemilih').value;
+        const filterKelas = document.getElementById('filter-kelas-cetak').value;
+
+        let filtered = dataSiswa.filter(s => {
+            let matchK = (filterKelas === 'ALL') || (s.kelas === filterKelas);
+            let matchS = true;
+            if(filterStatus === 'BELUM') matchS = !s.hasVoted;
+            if(filterStatus === 'SUDAH') matchS = s.hasVoted;
+            return matchK && matchS;
+        });
+
+        if(filtered.length === 0) return Swal.fire('Data Kosong', 'Tidak ada data pemilih yang sesuai kriteria filter.', 'info');
+
+        let statusText = filterStatus === 'ALL' ? 'SEMUA PEMILIH' : (filterStatus === 'SUDAH' ? 'PEMILIH SUDAH MEMILIH' : 'PEMILIH BELUM MEMILIH');
+        const logoOsisUrl = "https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1";
+
+        let printWindow = window.open('', '_blank');
+        let htmlContent = `
+        <html>
+        <head>
+            <title>Laporan Status Pemilih - OSIS SMAN 2 Cimalaka</title>
+            <style>
+                @page { size: A4; margin: 15mm; }
+                body { font-family: "Times New Roman", Times, serif; font-size: 12pt; color: #000; line-height: 1.3; }
+                .kop { border-bottom: 3px double #000; padding-bottom: 8px; margin-bottom: 20px; text-align: center; position: relative; }
+                .kop img { position: absolute; left: 10px; top: 0; width: 65px; height: 65px; object-fit: contain; }
+                .kop h2 { margin: 0; font-size: 13pt; font-weight: bold; text-transform: uppercase; }
+                .kop h1 { margin: 2px 0; font-size: 15pt; font-weight: bold; text-transform: uppercase; }
+                .kop p { margin: 0; font-size: 9.5pt; font-style: italic; }
+                .title { text-align: center; font-size: 13pt; font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 5px; }
+                .subtitle { text-align: center; font-size: 11pt; margin-bottom: 20px; }
+                table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+                th, td { border: 1px solid #000; padding: 6px 8px; font-size: 10pt; }
+                th { background-color: #f2f2f2; font-weight: bold; text-align: center; }
+                .ttd-container { width: 100%; margin-top: 30px; page-break-inside: avoid; }
+                .ttd-table { width: 100%; border: none; }
+                .ttd-table td { border: none; text-align: center; vertical-align: top; padding: 0; font-size: 11pt; }
+                .space-ttd { height: 60px; }
+            </style>
+        </head>
+        <body>
+            <div class="kop">
+                <img src="${logoOsisUrl}" alt="Logo OSIS">
+                <h2>ORGANISASI SISWA INTRA SEKOLAH (OSIS)</h2>
+                <h1>SMA NEGERI 2 CIMALAKA</h1>
+                <p>Jl. Licin No. 12 Cimalaka - Sumedang | Email: osis@sman2cimalaka.sch.id</p>
+            </div>
+
+            <div class="title">LAPORAN STATUS PARTISIPASI PEMILIH</div>
+            <div class="subtitle">Kategori: <b>${statusText}</b> | Kelas: <b>${filterKelas}</b></div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">No</th>
+                        <th style="width: 25%;">NISN / NIP</th>
+                        <th style="width: 40%;">Nama Lengkap</th>
+                        <th style="width: 15%;">Kelas</th>
+                        <th style="width: 15%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        filtered.forEach((s, idx) => {
+            htmlContent += `
+                <tr>
+                    <td style="text-align: center;">${idx + 1}</td>
+                    <td>${s.nisn}</td>
+                    <td>${s.nama}</td>
+                    <td style="text-align: center;">${s.kelas}</td>
+                    <td style="text-align: center; font-weight: bold; color: ${s.hasVoted ? 'green' : 'red'};">${s.hasVoted ? 'SUDAH' : 'BELUM'}</td>
+                </tr>
+            `;
+        });
+
+        htmlContent += `
+                </tbody>
+            </table>
+
+            <div class="ttd-container">
+                <p style="text-align: right; margin-bottom: 20px;">Cimalaka, ${info.tanggal}</p>
+                <table class="ttd-table">
+                    <tr>
+                        <td style="width: 50%;">
+                            Mengetahui,<br><b>Pembina OSIS</b>
+                            <div class="space-ttd"></div>
+                            <b>${info.pembina}</b><br>
+                            NIP. ${info.nip}
+                        </td>
+                        <td style="width: 50%;">
+                            <br><b>Ketua Panitia E-Voting</b>
+                            <div class="space-ttd"></div>
+                            <b>${info.ketua}</b><br>
+                            NIS. ${info.nisn}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <script>window.onload = function() { window.print(); };<\/script>
+        </body>
+        </html>
+        `;
+
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+    }
+
+    // --- CETAK REKAPITULASI HASIL VOTING PASLON ---
+    function executeCetakRekapitulasi(info) {
+        if(dataKandidat.length === 0) return Swal.fire('Gagal', 'Data kandidat belum tersedia.', 'error');
+
+        const totalDPT = dataSiswa.length;
+        const totalMasuk = dataVoting.length;
+        const totalBelum = totalDPT - totalMasuk;
+        const persentasePartisipasi = totalDPT > 0 ? ((totalMasuk / totalDPT) * 100).toFixed(2) : 0;
+
+        const voteCount = {}; 
+        dataKandidat.forEach(k => voteCount[k.id] = 0);
+        dataVoting.forEach(v => { if(voteCount[v.kandidatId] !== undefined) voteCount[v.kandidatId]++; });
+
+        const logoOsisUrl = "https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1";
+
+        let printWindow = window.open('', '_blank');
+        let htmlContent = `
+        <html>
+        <head>
+            <title>Berita Acara Rekapitulasi E-Voting OSIS</title>
+            <style>
+                @page { size: A4; margin: 15mm; }
+                body { font-family: "Times New Roman", Times, serif; font-size: 11pt; color: #000; line-height: 1.4; }
+                .kop { border-bottom: 3px double #000; padding-bottom: 8px; margin-bottom: 20px; text-align: center; position: relative; }
+                .kop img { position: absolute; left: 10px; top: 0; width: 65px; height: 65px; object-fit: contain; }
+                .kop h2 { margin: 0; font-size: 13pt; font-weight: bold; text-transform: uppercase; }
+                .kop h1 { margin: 2px 0; font-size: 15pt; font-weight: bold; text-transform: uppercase; }
+                .kop p { margin: 0; font-size: 9pt; font-style: italic; }
+                .title { text-align: center; font-size: 12pt; font-weight: bold; text-transform: uppercase; text-decoration: underline; }
+                .doc-num { text-align: center; font-size: 10pt; margin-bottom: 15px; }
+                table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+                th, td { border: 1px solid #000; padding: 6px 10px; font-size: 10pt; }
+                th { background-color: #f2f2f2; font-weight: bold; text-align: center; }
+                .summary-box { border: 1px solid #000; padding: 10px; margin-bottom: 15px; background: #fafafa; }
+                .ttd-container { width: 100%; margin-top: 25px; page-break-inside: avoid; }
+                .ttd-table { width: 100%; border: none; }
+                .ttd-table td { border: none; text-align: center; vertical-align: top; padding: 10px 5px; font-size: 10pt; }
+                .space-ttd { height: 50px; }
+            </style>
+        </head>
+        <body>
+            <div class="kop">
+                <img src="${logoOsisUrl}" alt="Logo OSIS">
+                <h2>ORGANISASI SISWA INTRA SEKOLAH (OSIS)</h2>
+                <h1>PANITIA PEMILIHAN KETUA & WAKIL KETUA OSIS</h1>
+                <h2>SMA NEGERI 2 CIMALAKA</h2>
+                <p>Jl. Licin No. 12 Cimalaka - Sumedang | Periode 2026/2027</p>
+            </div>
+
+            <div class="title">BERITA ACARA REKAPITULASI HASIL SUARA E-VOTING</div>
+            <div class="doc-num">Nomor: 004/PAN-EVOTING/OSIS/SMAN2/2026</div>
+
+            <p>Pada hari ini, tanggal <b>${info.tanggal}</b>, telah dilaksanakan Pemilihan Ketua & Wakil Ketua OSIS SMAN 2 Cimalaka Periode 2026/2027 secara elektronik (E-Voting). Berikut adalah rekapitulasi akhir perolehan suara:</p>
+
+            <div class="summary-box">
+                <table style="border:none; margin:0;">
+                    <tr style="border:none;"><td style="border:none; padding:2px;">• Total Daftar Pemilih Tetap (DPT)</td><td style="border:none; padding:2px;">: <b>${totalDPT} Pemilih</b></td></tr>
+                    <tr style="border:none;"><td style="border:none; padding:2px;">• Total Suara Masuk (Hak Suara Digunakan)</td><td style="border:none; padding:2px;">: <b>${totalMasuk} Suara (${persentasePartisipasi}%)</b></td></tr>
+                    <tr style="border:none;"><td style="border:none; padding:2px;">• Total Tidak Memilih / Golput</td><td style="border:none; padding:2px;">: <b>${totalBelum} Pemilih</b></td></tr>
+                </table>
+            </div>
+
+            <p><b>RINCIAN PEROLEHAN SUARA PASANGAN CALON:</b></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">No. Urut</th>
+                        <th style="width: 45%;">Nama Pasangan Calon (Ketua & Wakil)</th>
+                        <th style="width: 20%;">Jumlah Suara</th>
+                        <th style="width: 25%;">Persentase Suara</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        dataKandidat.sort((a,b) => a.id - b.id).forEach(k => {
+            const votes = voteCount[k.id] || 0;
+            const pct = totalMasuk > 0 ? ((votes / totalMasuk) * 100).toFixed(2) : 0;
+            htmlContent += `
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">0${k.id}</td>
+                    <td><b>Ketua:</b> ${k.ketua}<br><b>Wakil:</b> ${k.wakil}</td>
+                    <td style="text-align: center; font-weight: bold;">${votes} Suara</td>
+                    <td style="text-align: center; font-weight: bold;">${pct}%</td>
+                </tr>
+            `;
+        });
+
+        htmlContent += `
+                </tbody>
+            </table>
+
+            <p>Demikian Berita Acara Rekapitulasi Perolehan Suara ini dibuat dengan sebenarnya dan disetujui bersama oleh para pihak yang bersangkutan.</p>
+
+            <div class="ttd-container">
+                <p style="text-align: right; margin-bottom: 10px;">Cimalaka, ${info.tanggal}</p>
+                <table class="ttd-table">
+                    <tr>
+                        <td style="width: 50%;">
+                            <b>Pembina OSIS</b>
+                            <div class="space-ttd"></div>
+                            <b>${info.pembina}</b><br>
+                            NIP. ${info.nip}
+                        </td>
+                        <td style="width: 50%;">
+                            <b>Ketua Panitia E-Voting</b>
+                            <div class="space-ttd"></div>
+                            <b>${info.ketua}</b><br>
+                            NIS. ${info.nisn}
+                        </td>
+                    </tr>
+                    <tr>
+        `;
+
+        dataKandidat.sort((a,b) => a.id - b.id).forEach((k) => {
+            htmlContent += `
+                        <td style="width: 50%; padding-top: 15px;">
+                            <b>Saksi / Paslon No. 0${k.id}</b><br>
+                            <span style="font-size:9pt;">(${k.ketua} & ${k.wakil})</span>
+                            <div class="space-ttd"></div>
+                            <b>____________________________</b>
+                        </td>
+            `;
+        });
+
+        htmlContent += `
+                    </tr>
+                </table>
+            </div>
+
+            <script>window.onload = function() { window.print(); };<\/script>
+        </body>
+        </html>
+        `;
+
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+    }
+
     function updateLiveBoard() {
         const total = dataSiswa.length, masuk = dataVoting.length, belum = total - masuk;
         document.getElementById('stat-total-pemilih').innerText = total;
@@ -751,7 +1100,6 @@
         const labels = sortedKandidat.map(k => `Paslon ${k.id}`);
         const data = sortedKandidat.map(k => voteCount[k.id]);
 
-        // 1. UPDATE GRAFIK UTAMA
         if(votingChart) votingChart.destroy();
         const ctx = document.getElementById('votingChart').getContext('2d');
         const gradients = sortedKandidat.map((_, i) => {
@@ -783,7 +1131,6 @@
             }
         });
 
-        // 2. RENDER KARTU STATISTIK DETIL PASLON DI BAWAH GRAFIK (ELEGAND & PROPORSIAL)
         const cardContainer = document.getElementById('liveboard-kandidat-cards');
         if (cardContainer) {
             cardContainer.innerHTML = '';
@@ -798,7 +1145,6 @@
                 cardContainer.innerHTML += `
                     <div class="bg-white rounded-xl border ${isLeading ? 'border-yellow-400 ring-2 ring-yellow-400/50 shadow-md' : 'border-gray-200'} p-3 md:p-4 relative overflow-hidden flex flex-col justify-between">
                         ${isLeading ? '<div class="absolute top-0 right-0 bg-yellow-400 text-blue-900 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-bl-lg shadow"><i class="fas fa-crown mr-1"></i> Unggul</div>' : ''}
-                        
                         <div>
                             <div class="flex items-center space-x-3 mb-3">
                                 <img src="${fotoUrl}" alt="Foto Paslon ${k.id}" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-blue-600 shadow-sm flex-shrink-0">
@@ -808,8 +1154,6 @@
                                     <p class="text-xs text-gray-500 truncate">& ${k.wakil}</p>
                                 </div>
                             </div>
-
-                            <!-- Progress Bar & Statistik -->
                             <div class="mb-1">
                                 <div class="flex justify-between items-end mb-1">
                                     <span class="text-xl md:text-2xl font-black text-blue-900">${votes} <span class="text-xs font-normal text-gray-500">Suara</span></span>
@@ -826,7 +1170,6 @@
         }
     }
 
-    // --- SECURITY PANITIA ---
     function showPanitiaLogin() {
         Swal.fire({
             title: '<i class="fas fa-lock text-3xl text-gray-700 mb-2"></i><br>Akses Panitia',
@@ -846,6 +1189,5 @@
 
     fetchData();
 </script>
-
 </body>
 </html>

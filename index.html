@@ -674,7 +674,7 @@
         let defaultDate = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         
         Swal.fire({
-            title: '<span class="text-blue-900 text-lg font-bold"><i class="fas fa-file-signature mr-2"></i>Informasi Penandatangan Dokumen</span>',
+            title: '<span class="text-blue-900 text-lg font-bold"><i class="fas fa-file-signature mr-2"></i>Informasi Penandatangan & Pelaksanaan</span>',
             html: `
                 <div class="text-left text-xs space-y-3 mt-2">
                     <div>
@@ -694,8 +694,8 @@
                         <input type="text" id="swal-nip" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: 198506122010011005" value="198506122010011005">
                     </div>
                     <div>
-                        <label class="font-semibold text-gray-700 block mb-1">Tanggal Pemilihan / Surat (Titimangsa):</label>
-                        <input type="text" id="swal-tanggal" class="swal2-input !m-0 !w-full text-sm" placeholder="Contoh: 15 November 2026" value="${defaultDate}">
+                        <label class="font-semibold text-blue-900 block mb-1">Tanggal Hari Pemilihan / Voting (Jadwal Pemilih):</label>
+                        <input type="text" id="swal-tanggal-pemilih" class="swal2-input !m-0 !w-full text-sm font-semibold border-blue-500" placeholder="Contoh: Senin, 16 November 2026" value="${defaultDate}">
                     </div>
                 </div>
             `,
@@ -705,12 +705,15 @@
             cancelButtonText: 'Batal',
             focusConfirm: false,
             preConfirm: () => {
+                // Tanggal titimangsa otomatis dibuat sesuai tanggal hari ini saat cetak
+                const titimangsaOtomatis = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                 return {
                     ketua: document.getElementById('swal-ketua').value,
                     nisn: document.getElementById('swal-nisn').value,
                     pembina: document.getElementById('swal-pembina').value,
                     nip: document.getElementById('swal-nip').value,
-                    tanggal: document.getElementById('swal-tanggal').value
+                    tanggalPemilih: document.getElementById('swal-tanggal-pemilih').value,
+                    titimangsa: titimangsaOtomatis
                 }
             }
         }).then((result) => {
@@ -724,7 +727,7 @@
         });
     }
 
-    // --- CETAK SURAT UNDANGAN PEMILIH (2 ORANG PER LEMBAR A4) ---
+    // --- CETAK SURAT UNDANGAN PEMILIH (DENGAN INFO PASLON & QR BESAR) ---
     function cetakSuratUndanganMassal(info) {
         if(dataSiswa.length === 0) return Swal.fire('Kosong', 'Belum ada data pemilih', 'info');
         const filterKelas = document.getElementById('filter-kelas-cetak').value;
@@ -742,6 +745,12 @@
 
     function renderAndOpenPrintWindowForUndangan(listSiswa, info) {
         const logoOsisUrl = "https://www.dropbox.com/scl/fi/blt4cfhsjxfm4afd82g6o/Logo-Dll-3.png?rlkey=uz8fu7x6d1snrqfsmw3r5lqw8&st=ljyg9gln&raw=1";
+        
+        let paslonHtmlList = '';
+        dataKandidat.sort((a,b) => a.id - b.id).forEach(k => {
+            paslonHtmlList += `<li><b>Paslon 0${k.id}:</b> ${k.ketua} & ${k.wakil}</li>`;
+        });
+
         let printWindow = window.open('', '_blank');
         
         let htmlContent = `
@@ -750,33 +759,35 @@
             <title>Surat Undangan Pemilihan OSIS SMAN 2 Cimalaka</title>
             <style>
                 @page { size: A4; margin: 10mm; }
-                body { font-family: "Times New Roman", Times, serif; font-size: 10pt; color: #000; line-height: 1.25; }
-                .page-card { height: 130mm; display: flex; flex-direction: column; justify-content: space-between; padding: 4mm 8mm; box-sizing: border-box; page-break-inside: avoid; }
-                .divider { border-bottom: 2px dashed #333; margin: 4mm 0; }
-                .kop { border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 6px; text-align: center; position: relative; }
-                .kop img { position: absolute; left: 5px; top: 0; width: 45px; height: 45px; object-fit: contain; }
-                .kop h2 { margin: 0; font-size: 10pt; font-weight: bold; text-transform: uppercase; }
-                .kop h1 { margin: 1px 0; font-size: 11pt; font-weight: bold; text-transform: uppercase; }
-                .kop p { margin: 0; font-size: 8pt; font-style: italic; }
-                .title { text-align: center; font-size: 10pt; font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 2px; }
-                .doc-num { text-align: center; font-size: 8.5pt; margin-bottom: 5px; }
-                .content-box { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-                .text-details { width: 72%; font-size: 9.5pt; }
-                .qr-box { width: 25%; text-align: center; border: 1px solid #000; padding: 3px; background: #fafafa; }
-                .qr-box img { width: 75px; height: 75px; }
-                .schedule-table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 9pt; }
-                .schedule-table td { border: 1px solid #000; padding: 3px 5px; }
-                .ttd-table { width: 100%; border: none; margin-top: 4px; }
-                .ttd-table td { border: none; text-align: right; vertical-align: top; padding: 0; font-size: 9.5pt; }
-                .space-ttd { height: 32px; }
+                body { font-family: "Times New Roman", Times, serif; font-size: 9.5pt; color: #000; line-height: 1.2; }
+                .page-card { height: 130mm; display: flex; flex-direction: column; justify-content: space-between; padding: 3mm 6mm; box-sizing: border-box; page-break-inside: avoid; }
+                .divider { border-bottom: 2px dashed #333; margin: 3mm 0; }
+                .kop { border-bottom: 2px solid #000; padding-bottom: 3px; margin-bottom: 4px; text-align: center; position: relative; }
+                .kop img { position: absolute; left: 5px; top: 0; width: 42px; height: 42px; object-fit: contain; }
+                .kop h2 { margin: 0; font-size: 9.5pt; font-weight: bold; text-transform: uppercase; }
+                .kop h1 { margin: 1px 0; font-size: 10.5pt; font-weight: bold; text-transform: uppercase; }
+                .kop p { margin: 0; font-size: 7.5pt; font-style: italic; }
+                .title { text-align: center; font-size: 9.5pt; font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 2px; }
+                .doc-num { text-align: center; font-size: 8pt; margin-bottom: 4px; }
+                .content-box { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px; }
+                .text-details { width: 66%; font-size: 9pt; }
+                .qr-box { width: 31%; text-align: center; border: 1px solid #000; padding: 2px; background: #fafafa; }
+                .qr-box img { width: 95px; height: 95px; }
+                .schedule-table { width: 100%; border-collapse: collapse; margin: 3px 0; font-size: 8.5pt; }
+                .schedule-table td { border: 1px solid #000; padding: 2px 4px; }
+                .paslon-box { border: 1px solid #ccc; padding: 3px 6px; background: #fdfdfd; margin-top: 3px; font-size: 8.5pt; }
+                .paslon-box ul { margin: 0; padding-left: 15px; }
+                .ttd-table { width: 100%; border: none; margin-top: 2px; }
+                .ttd-table td { border: none; text-align: right; vertical-align: top; padding: 0; font-size: 9pt; }
+                .space-ttd { height: 28px; }
             </style>
         </head>
         <body>
         `;
 
         for (let i = 0; i < listSiswa.length; i++) {
-            let s = listSisan = listSiswa[i];
-            let qr = new QRious({ value: `EVOTING-${s.nisn}`, size: 100, level: 'H' });
+            let s = listSiswa[i];
+            let qr = new QRious({ value: `EVOTING-${s.nisn}`, size: 140, level: 'H' });
             
             htmlContent += `
             <div class="page-card">
@@ -785,27 +796,34 @@
                         <img src="${logoOsisUrl}" alt="Logo OSIS">
                         <h2>ORGANISASI SISWA INTRA SEKOLAH (OSIS)</h2>
                         <h1>PANITIA PEMILIHAN KETUA & WAKIL KETUA OSIS</h1>
-                        <p>SMA NEGERI 2 CIMALAKA - Jl. Licin No. 12 Sumedang</p>
+                        <p>SMA NEGERI 2 CIMALAKA - Jl. Margamukti Licin No. 96, Cimalaka - Sumedang 45353</p>
                     </div>
 
                     <div class="title">SURAT UNDANGAN PEMILIHAN E-VOTING OSIS</div>
                     <div class="doc-num">Nomor: 001/PAN-EVOTING/OSIS/SMAN2/2026</div>
 
-                    <p style="margin: 2px 0 4px 0; font-size: 9.5pt;">Kepada Yth.<br><b>Sdr/i. ${s.nama} (${s.kelas})</b><br>di Tempat</p>
+                    <p style="margin: 2px 0 3px 0; font-size: 9pt;">Kepada Yth.<br><b>Sdr/i. ${s.nama} (${s.kelas})</b><br>di Tempat</p>
 
-                    <p style="margin: 2px 0 4px 0; font-size: 9pt; text-align: justify;">Dengan hormat, sehubungan dengan penyelenggaraan Demokrasi Sekolah Pemilihan Ketua & Wakil Ketua OSIS SMAN 2 Cimalaka Periode 2026/2027, dengan ini kami mengundang Anda untuk menggunakan hak pilih suara secara elektronik.</p>
+                    <p style="margin: 2px 0 3px 0; font-size: 8.5pt; text-align: justify;">Dengan hormat, sehubungan dengan Demokrasi Sekolah Pemilihan OSIS SMAN 2 Cimalaka Periode 2026/2027, Anda diundang menggunakan hak suara elektronik dengan daftar Paslon berikut:</p>
 
-                    <div class="content-box">
+                    <div class="paslon-box">
+                        <b>Kandidat Pasangan Calon:</b>
+                        <ul>
+                            ${paslonHtmlList}
+                        </ul>
+                    </div>
+
+                    <div class="content-box" style="margin-top: 4px;">
                         <div class="text-details">
                             <table class="schedule-table">
-                                <tr><td style="width: 32%;"><b>Hari / Tanggal</b></td><td>: ${info.tanggal}</td></tr>
-                                <tr><td><b>Waktu</b></td><td>: Pukul 08.00 s.d. 14.00 WIB</td></tr>
+                                <tr><td style="width: 34%;"><b>Hari / Tanggal</b></td><td>: ${info.tanggalPemilih}</td></tr>
+                                <tr><td><b>Waktu</b></td><td>: 08.00 - 14.00 WIB</td></tr>
                                 <tr><td><b>Tempat</b></td><td>: Bilik Suara SMAN 2 Cimalaka</td></tr>
                             </table>
                         </div>
                         <div class="qr-box">
                             <img src="${qr.toDataURL('image/png')}"><br>
-                            <span style="font-size: 7.5pt; font-weight: bold;">SCAN QR ABSEN</span>
+                            <span style="font-size: 7pt; font-weight: bold;">SCAN QR ABSEN</span>
                         </div>
                     </div>
                 </div>
@@ -813,7 +831,7 @@
                 <table class="ttd-table">
                     <tr>
                         <td>
-                            Sumedang, ${info.tanggal}<br><b>Ketua Panitia E-Voting</b>
+                            Cimalaka, ${info.titimangsa}<br><b>Ketua Panitia E-Voting</b>
                             <div class="space-ttd"></div>
                             <b>${info.ketua}</b><br>
                             NIS. ${info.nisn}
@@ -823,11 +841,9 @@
             </div>
             `;
 
-            // Tambahkan garis pemisah jika bukan elemen terakhir dan berada di urutan ganjil (indeks genap)
             if (i < listSiswa.length - 1 && i % 2 === 0) {
                 htmlContent += `<div class="divider"></div>`;
             } else if (i < listSiswa.length - 1 && i % 2 !== 0) {
-                // Jika sudah genap 2 undangan per lembar, buat page break agar masuk ke halaman berikutnya
                 htmlContent += `<div style="page-break-after: always;"></div>`;
             }
         }
@@ -884,7 +900,7 @@
                 <img src="${logoOsisUrl}" alt="Logo OSIS">
                 <h2>ORGANISASI SISWA INTRA SEKOLAH (OSIS)</h2>
                 <h1>SMA NEGERI 2 CIMALAKA</h1>
-                <p>Jl. Licin No. 12 Cimalaka - Sumedang | Email: osis@sman2cimalaka.sch.id</p>
+                <p>Jl. Margamukti Licin No. 96 Cimalaka - Sumedang 45353 | Email: osissmandaci@gmail.com</p>
             </div>
 
             <div class="title">LAPORAN STATUS PARTISIPASI PEMILIH</div>
@@ -920,7 +936,7 @@
             </table>
 
             <div class="ttd-container">
-                <p style="text-align: right; margin-bottom: 20px;">Cimalaka, ${info.tanggal}</p>
+                <p style="text-align: right; margin-bottom: 20px;">Sumedang, ${info.titimangsa}</p>
                 <table class="ttd-table">
                     <tr>
                         <td style="width: 50%;">
@@ -1000,7 +1016,7 @@
             <div class="title">BERITA ACARA REKAPITULASI HASIL SUARA E-VOTING</div>
             <div class="doc-num">Nomor: 004/PAN-EVOTING/OSIS/SMAN2/2026</div>
 
-            <p>Pada hari ini, tanggal <b>${info.tanggal}</b>, telah dilaksanakan Pemilihan Ketua & Wakil Ketua OSIS SMAN 2 Cimalaka Periode 2026/2027 secara elektronik (E-Voting). Berikut adalah rekapitulasi akhir perolehan suara:</p>
+            <p>Pada hari ini, tanggal <b>${info.tanggalPemilih}</b>, telah dilaksanakan Pemilihan Ketua & Wakil Ketua OSIS SMAN 2 Cimalaka Periode 2026/2027 secara elektronik (E-Voting). Berikut adalah rekapitulasi akhir perolehan suara:</p>
 
             <div class="summary-box">
                 <table style="border:none; margin:0;">
@@ -1043,7 +1059,7 @@
             <p>Demikian Berita Acara Rekapitulasi Perolehan Suara ini dibuat dengan sebenarnya dan disetujui bersama oleh para pihak yang bersangkutan.</p>
 
             <div class="ttd-container">
-                <p style="text-align: right; margin-bottom: 10px;">Cimalaka, ${info.tanggal}</p>
+                <p style="text-align: right; margin-bottom: 10px;">Cimalaka, ${info.titimangsa}</p>
                 <table class="ttd-table">
                     <tr>
                         <td style="width: 50%;">
